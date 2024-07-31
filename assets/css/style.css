@@ -414,8 +414,17 @@ h6,
   left: 15px;
   padding: 10px 0;
   background-color: #fff;
+  text-align: center;
   overflow-y: auto;
   transition: 0.3s;
+}
+
+.navbar-mobile .nav-link  {
+  align-self: center;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
 }
 
 .navbar-mobile a,
@@ -450,6 +459,7 @@ h6,
 
 .navbar-mobile .dropdown ul li {
   min-width: 200px;
+  
 }
 
 .navbar-mobile .dropdown ul a {
@@ -468,6 +478,31 @@ h6,
 
 .navbar-mobile .dropdown>.dropdown-active {
   display: block;
+}
+
+.navbar-mobile .mbfacebook {
+  border-bottom: 1px solid #ddd;
+}
+.navbar-mobile li .facebook {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  
+}
+.navbar-mobile li .viber {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.navbar-mobile li .telegram {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.navbar-mobile li .line {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.navbar-mobile li .instagram {
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 /*--------------------------------------------------------------
