@@ -1543,6 +1543,11 @@ section {
 /*--------------------------------------------------------------
 # Contact Us
 --------------------------------------------------------------*/
+.centered-container{
+  justify-content: center; /* Centers horizontally */
+  align-items: center; 
+}
+
 .contact .info-box {
   color: #fff;
   text-align: center;
@@ -1693,6 +1698,7 @@ section {
 
 #footer .footer-top .footer-info {
   margin-bottom: 30px;
+  text-align: center;
 }
 
 #footer .footer-top .footer-info h3 {
@@ -1829,4 +1835,12 @@ section {
 
 #footer .credits a {
   color: #9eccf4;
+}
+
+.responsive-img {
+  max-width: 240px;
+  height: 100px; /* This maintains the aspect ratio */
+  display: block; /* Optional: removes bottom margin/whitespace */
+  margin-left: auto; /* Center the image */
+  margin-right: auto; /* Center the image */
 }
