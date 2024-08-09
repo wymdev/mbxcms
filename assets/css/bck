@@ -1,0 +1,132 @@
+.testimonial {
+  margin: 0 17px 40px;
+}
+
+.testimonial .testimonial-content {
+  padding: 35px 25px 35px 50px;
+  margin-bottom: 35px;
+  background: #fff;
+  position: relative;
+}
+
+.testimonial .testimonial-content:before {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  border-top: 15px solid #718076;
+  border-left: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.testimonial .testimonial-content:after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+  border-top: 15px solid #718076;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.testimonial-content .testimonial-icon {
+  width: 50px;
+  height: 45px;
+  background: #0CCA4A;
+  text-align: center;
+  font-size: 22px;
+  color: #fff;
+  line-height: 42px;
+  position: absolute;
+  top: 37px;
+  left: -19px;
+}
+
+.testimonial-content .testimonial-icon:before {
+  content: "";
+  border-bottom: 16px solid #05A739;
+  border-left: 18px solid transparent;
+  position: absolute;
+  top: -16px;
+  left: 1px;
+}
+
+.feedback-image {
+  width: 100%;
+  /* Make the image responsive */
+  height: 40%;
+  /* Maintain the aspect ratio */
+  max-width: 500px;
+  /* Limit the maximum width */
+  border-radius: 8px;
+  /* Optional: add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Optional: add shadow to the image */
+  margin: 0 auto;
+  /* Center the image */
+}
+
+/* .testimonial .description {
+  font-size: 15px;
+  font-style: italic;
+  color: #8a8a8a;
+  line-height: 23px;
+  margin: 0;
+} */
+.testimonial .description {
+  margin: 0;
+  padding: 0;
+}
+
+.testimonial .title {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  /* color: #525252; */
+  color : #fcb600;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  margin: 0 0 5px 0;
+}
+
+.testimonial .post {
+  display: block;
+  font-size: 14px;
+  color: #0CCA4A;
+}
+
+.owl-theme .owl-controls {
+  margin-top: 20px;
+}
+
+.owl-theme .owl-controls .owl-page span {
+  background: #ccc;
+  opacity: 1;
+  transition: all 0.4s ease 0s;
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+  background: #0CCA4A;
+}
+
+.owl-carousel {
+  width: auto; /* Set to auto if not already done */
+  margin: 0 auto; /* Center the carousel */
+}
+
+.owl-carousel .owl-item {
+  width: auto !important;
+  max-width: auto !important;
+  box-sizing: border-box;
+  padding: 0 10px; 
+}
+
+.owl-carousel .owl-item img {
+  transform-style: preserve-3d;
+  height: 200px;
+  width: 550;
+  max-width: 550;
+  margin: 0 auto 17px;
+  object-fit: contain;
+}
