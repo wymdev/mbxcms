@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+/* Brand tokens: logo gold on deep forest green */
+@theme {
+  --color-forest-950: #06201a;
+  --color-forest-900: #0a2a20;
+  --color-forest-800: #0e3b2e;
+  --color-forest-700: #12523f;
+  --color-forest-600: #0e7c5a;
+  --color-mint: #8fd3b6;
+  --color-mist: #eef4f1;
+  --color-paper: #f7faf8;
+  --color-ink: #10201a;
+  --color-slate: #52605a;
+  --color-gold: #fdb600;
+  --color-gold-600: #d99a00;
+  --color-gold-100: #fff3cc;
+  --color-up: #0e7c5a;
+  --color-down: #c2412d;
+
+  --font-sans: 'Manrope', 'Noto Sans Myanmar', system-ui, sans-serif;
+  --font-display: 'Montserrat', 'Manrope', system-ui, sans-serif;
+  --font-myanmar: 'Noto Sans Myanmar', 'Manrope', sans-serif;
+
+  --radius-sheet: 2.25rem;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-forest-900 text-ink antialiased font-sans;
+    overflow-x: clip;
+  }
+  ::selection {
+    @apply bg-gold text-forest-900;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+/* Content width: wide on big screens, left-anchored, never a narrow centred column */
+@utility shell {
+  @apply mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-10;
+}
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em];
+}
+@utility display {
+  @apply font-display font-extrabold tracking-tight leading-[1.05];
+}
+/* Sections stack like app sheets: rounded top edge riding over the previous section */
+@utility sheet {
+  @apply relative -mt-10 rounded-t-[var(--radius-sheet)] pt-20 pb-24 sm:pt-24 sm:pb-28;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-bold transition-[transform,background-color,color,box-shadow] duration-300 ease-[var(--ease-out-soft)] active:scale-[0.97];
+}
+@utility btn-gold {
+  @apply btn bg-gold text-forest-900 shadow-[0_10px_30px_-10px_rgba(253,182,0,0.6)] hover:bg-gold-600 hover:shadow-[0_14px_36px_-12px_rgba(253,182,0,0.75)];
+}
+@utility btn-ghost {
+  @apply btn bg-white/10 text-white ring-1 ring-white/20 backdrop-blur hover:bg-white/15;
+}
+@utility btn-dark {
+  @apply btn bg-forest-900 text-white hover:bg-forest-800;
+}
+@utility num {
+  font-variant-numeric: tabular-nums;
+}
+@utility mm {
+  @apply font-myanmar leading-[1.9];
+}
+
+/* Moving grid behind the hero */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 30% 40%, black 40%, transparent 100%);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+  animation-duration: 55s;
+}
+.marquee:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+}
+
+.pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
