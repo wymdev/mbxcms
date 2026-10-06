@@ -15,6 +15,25 @@ npm run preview    # serve dist/ at http://localhost:4173
 
 ## Deploy to cPanel (Z.com)
 
+### Automatic (GitHub Actions)
+
+Every push to `main` builds the site and uploads `dist/` over FTP (`.github/workflows/deploy.yml`).
+It can also be run by hand from the repo's **Actions** tab → **Deploy to cPanel** → **Run workflow**.
+
+Set these once in GitHub → **Settings → Secrets and variables → Actions**:
+
+| Name | Kind | Value |
+|---|---|---|
+| `FTP_SERVER` | secret | FTP host from cPanel → FTP Accounts, e.g. `ftp.example.com` |
+| `FTP_USERNAME` | secret | FTP user, e.g. `deploy@example.com` |
+| `FTP_PASSWORD` | secret | FTP password |
+| `FTP_SERVER_DIR` | variable (optional) | Upload folder, ending in `/`. Default `/public_html/`; use `./` if the FTP account's home is already `public_html` |
+| `VITE_RATES_URL` | variable (optional) | Live rates endpoint; without it the site shows sample rates |
+
+If the upload fails with a TLS/certificate error, change `protocol: ftps` to `ftp` in the workflow.
+
+### Manual
+
 1. `npm run build`
 2. Upload **the contents of `dist/`** (including the hidden `.htaccess`) into `public_html`
    using cPanel File Manager or FTP.
