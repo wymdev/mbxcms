@@ -1,18 +1,19 @@
-# Build the site and upload dist/ to cPanel over FTP on every push to main.
+# Staging FTP account must be rooted directly in the staginghome directory.
 # Needs repository secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD (see README "Deploy").
-name: Deploy to cPanel
+name: Deploy staging to cPanel
 
 on:
   push:
-    branches: [main]
+    branches: [staging]
   workflow_dispatch:
 
 concurrency:
-  group: deploy
+  group: deploy-staging
   cancel-in-progress: false
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +30,7 @@ jobs:
           # optional repository variable; without it the site shows sample rates
           VITE_RATES_URL: ${{ vars.VITE_RATES_URL }}
 
-      - name: Upload dist/ to public_html
+      - name: Upload dist/ to staging FTP root
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -37,5 +38,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           local-dir: ./dist/
-          # main cPanel account: /public_html/ — an FTP account created for public_html: ./
-          server-dir: ${{ vars.FTP_SERVER_DIR || '/public_html/' }}
+          # The FTP account already points at staginghome; do not append public_html.
+          server-dir: ./
