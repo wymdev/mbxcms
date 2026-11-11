@@ -1,7 +1,7 @@
 # Mergui Boss front store — Apache / cPanel config (copied into dist/ on build)
 
 RewriteEngine On
-RewriteBase /
+Options -Indexes
 
 # Force HTTPS
 RewriteCond %{HTTPS} off
@@ -11,7 +11,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
+RewriteRule . index.html [L]
 
 <IfModule mod_headers.c>
   # Never cache the page shell or the clean-up service worker, so updates reach users at once

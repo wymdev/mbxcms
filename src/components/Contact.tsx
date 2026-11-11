@@ -93,7 +93,7 @@ export function Contact() {
       <footer className="shell mt-20 border-t border-white/10 pt-10">
         <div className="grid gap-8 md:grid-cols-12">
           <div className="md:col-span-5">
-            <img src="/logo.png" alt={site.legalName} className="h-12 w-auto" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt={site.legalName} className="h-12 w-auto" />
             <p className="mm mt-4 max-w-sm text-sm text-white/55">မားဂွီးဘော့စ် ထိုင်း ⇄ မြန်မာ ငွေလဲဝန်ဆောင်မှု</p>
           </div>
           <ul className="grid grid-cols-2 gap-2 text-sm font-semibold text-white/70 md:col-span-4">

@@ -11,7 +11,7 @@ const GAP = 16;
 /** Banner artwork ratio (height / width). */
 const RATIO = 11 / 20;
 
-const src = (b: Banner, w: 1000 | 2000) => `/images/banners/${b.name}-${w}.webp`;
+const src = (b: Banner, w: 1000 | 2000) => `${import.meta.env.BASE_URL}images/banners/${b.name}-${w}.webp`;
 /** Wrap any slot number onto a banner index (works for negatives). */
 const wrap = (k: number, n: number) => ((k % n) + n) % n;
 

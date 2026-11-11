@@ -66,7 +66,7 @@ function Phone({ step }: { step: number }) {
       <div className="absolute left-1/2 top-3 h-5 w-20 -translate-x-1/2 rounded-full bg-ink" />
       <div className="h-[30rem] overflow-hidden rounded-[2.1rem] bg-white p-4 pt-10 text-ink sm:h-[33rem]">
         <div className="mb-4 flex items-center gap-2 border-b border-ink/10 pb-3">
-          <img src="/mark.png" alt="" className="size-8 rounded-full bg-forest-900 p-1" />
+          <img src={`${import.meta.env.BASE_URL}mark.png`} alt="" className="size-8 rounded-full bg-forest-900 p-1" />
           <div><div className="text-sm font-extrabold">Mergui Boss</div><div className="text-[11px] text-forest-600">online</div></div>
         </div>
         <AnimatePresence mode="wait">

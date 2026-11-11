@@ -60,7 +60,7 @@ export function About() {
         <div className="lg:col-span-5">
           <SectionHead stack eyebrow="About us" title={<>Money home, <span className="text-forest-600">done right</span>.</>} />
           <Reveal className="-mt-4 flex items-center gap-4">
-            <Item><img src="/mark.png" alt="" className="size-20 rounded-3xl bg-forest-900 p-3" /></Item>
+            <Item><img src={`${import.meta.env.BASE_URL}mark.png`} alt="" className="size-20 rounded-3xl bg-forest-900 p-3" /></Item>
             <Item><div className="text-sm font-semibold text-slate">{site.legalName}<br />{site.address}</div></Item>
           </Reveal>
         </div>

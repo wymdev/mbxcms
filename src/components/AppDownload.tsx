@@ -82,7 +82,7 @@ export function AppDownload() {
             className="mx-auto w-64 rounded-[2.6rem] bg-ink p-2.5 shadow-[0_50px_100px_-40px_rgba(0,0,0,0.9)] ring-1 ring-white/10 lg:ml-auto lg:mr-10">
             <div className="flex h-[28rem] flex-col gap-4 rounded-[2.1rem] bg-gradient-to-b from-forest-700 to-forest-900 p-5 pt-10">
               <div className="flex items-center gap-2">
-                <img src="/icon-192.png" alt="" className="size-8 rounded-xl" />
+                <img src={`${import.meta.env.BASE_URL}icon-192.png`} alt="" className="size-8 rounded-xl" />
                 <span className="text-sm font-extrabold">Mergui Boss</span>
               </div>
               <div className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/10">

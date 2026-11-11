@@ -4,7 +4,7 @@ import { Expand, X } from 'lucide-react';
 import { SectionHead } from './ui';
 
 /** Real Facebook recommendations, kept as screenshots from the previous site (public/images/reviews). */
-const REVIEWS = Array.from({ length: 10 }, (_, i) => `/images/reviews/fb${i + 1}.webp`);
+const REVIEWS = Array.from({ length: 10 }, (_, i) => `${import.meta.env.BASE_URL}images/reviews/fb${i + 1}.webp`);
 const rowA = REVIEWS.slice(0, 5), rowB = REVIEWS.slice(5);
 
 function Card({ src, onOpen, wide = false }: { src: string; onOpen: (s: string) => void; wide?: boolean }) {

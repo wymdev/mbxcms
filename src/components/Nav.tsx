@@ -35,7 +35,7 @@ export function Nav() {
         <motion.div className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-gold" style={{ scaleX: progress }} aria-hidden />
         <nav className="shell flex h-16 items-center gap-6 lg:h-20" aria-label="Main">
           <a href="#top" className="shrink-0" aria-label={`${site.name} home`}>
-            <img src="/logo.png" alt={site.legalName} className="h-9 w-auto lg:h-11" width={640} height={183} />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt={site.legalName} className="h-9 w-auto lg:h-11" width={640} height={183} />
           </a>
           <ul className="ml-4 hidden items-center gap-1 lg:flex">
             {NAV.map((n) => (
@@ -62,7 +62,7 @@ export function Nav() {
         {open && (
           <motion.div className="fixed inset-0 z-[60] bg-forest-950/95 backdrop-blur-xl lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="shell flex h-16 items-center justify-between">
-              <img src="/logo.png" alt="" className="h-9 w-auto" />
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="" className="h-9 w-auto" />
               <button onClick={() => setOpen(false)} className="grid size-11 place-items-center rounded-full bg-white/10 text-white" aria-label="Close menu">
                 <X className="size-5" />
               </button>
