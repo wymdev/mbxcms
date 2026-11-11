@@ -3,7 +3,7 @@
 RewriteEngine On
 RewriteBase /
 
-# Force HTTPS (needed for the PWA service worker)
+# Force HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
@@ -13,13 +13,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
 
-<IfModule mod_mime.c>
-  AddType application/manifest+json .webmanifest
-</IfModule>
-
 <IfModule mod_headers.c>
-  # Never cache the page shell or the service worker, so updates reach users at once
-  <FilesMatch "^(index\.html|sw\.js|registerSW\.js|manifest\.webmanifest)$">
+  # Never cache the page shell or the clean-up service worker, so updates reach users at once
+  <FilesMatch "^(index\.html|sw\.js)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
   </FilesMatch>
   # Vite's hashed build files (/assets/*) can be cached for a year; other images for a day

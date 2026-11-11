@@ -1,6 +1,6 @@
 /**
  * Hero banner slides. Images live in public/images/banners as `<name>-2000.webp` and `<name>-1000.webp`
- * (20:11 ratio). To add a banner: export both sizes, add an entry here.
+ * (20:11 ratio; on wide screens the top and bottom are trimmed, so keep text in the middle). To add a banner: export both sizes, add an entry here.
  */
 export interface Banner {
   name: string;

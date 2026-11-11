@@ -9,14 +9,12 @@ import { HowItWorks } from './components/HowItWorks';
 import { About, WhyUs } from './components/WhyUs';
 import { Membership } from './components/Membership';
 import { Reviews } from './components/Reviews';
-import { AppInstall } from './components/AppInstall';
+import { AppDownload } from './components/AppDownload';
 import { Contact, Faq } from './components/Contact';
 import { useRates } from './hooks/useRates';
-import { useInstallPrompt } from './hooks/useInstallPrompt';
 
 export default function App() {
   const { rates, updatedAt, sample, loading, refresh } = useRates();
-  const pwa = useInstallPrompt();
   const [from, setFrom] = useState('THB');
   const [to, setTo] = useState('MMK');
   const [amount, setAmount] = useState(10_000);
@@ -32,7 +30,7 @@ export default function App() {
       <a href="#rates" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:font-bold">
         Skip to rates
       </a>
-      <Nav canInstall={pwa.canInstall} onInstall={pwa.install} />
+      <Nav />
       <main>
         <Hero rates={rates} sample={sample} />
         <Rates rates={rates} updatedAt={updatedAt} sample={sample} loading={loading} onConvert={convert} onRefresh={refresh} />
@@ -43,7 +41,7 @@ export default function App() {
         <Reviews />
         <About />
         <Membership />
-        <AppInstall canInstall={pwa.canInstall} installed={pwa.installed} isIOS={pwa.isIOS} onInstall={pwa.install} />
+        <AppDownload />
         <Faq />
         <Contact />
       </main>

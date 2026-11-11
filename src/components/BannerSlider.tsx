@@ -8,6 +8,8 @@ import { banners, type Banner } from '../config/banners';
 
 const SLIDE_MS = 6000;
 const GAP = 16;
+/** Banner artwork ratio (height / width). */
+const RATIO = 11 / 20;
 
 const src = (b: Banner, w: 1000 | 2000) => `/images/banners/${b.name}-${w}.webp`;
 /** Wrap any slot number onto a banner index (works for negatives). */
@@ -17,8 +19,8 @@ const wrap = (k: number, n: number) => ((k % n) + n) % n;
  * One slide at slot `k` of an endless track. Slots are unbounded integers; the banner shown is
  * banners[k mod n], so the first banner always follows the last one.
  */
-function Slide({ b, k, num, x, step, width, active, onPick, dragging }: {
-  b: Banner; k: number; num: number; x: MotionValue<number>; step: number; width: number; active: boolean;
+function Slide({ b, k, num, x, step, width, height, active, onPick, dragging }: {
+  b: Banner; k: number; num: number; x: MotionValue<number>; step: number; width: number; height: number; active: boolean;
   onPick: (k: number) => void; dragging: React.RefObject<boolean>;
 }) {
   const reduce = useReducedMotion();
@@ -33,21 +35,21 @@ function Slide({ b, k, num, x, step, width, active, onPick, dragging }: {
   const tilt = (e: PointerEvent<HTMLDivElement>) => {
     if (!active || reduce || e.pointerType !== 'mouse') return;
     const r = e.currentTarget.getBoundingClientRect();
-    ry.set(((e.clientX - r.left) / r.width - 0.5) * 5);
-    rx.set(-((e.clientY - r.top) / r.height - 0.5) * 5);
+    ry.set(((e.clientX - r.left) / r.width - 0.5) * 2);
+    rx.set(-((e.clientY - r.top) / r.height - 0.5) * 2);
   };
   const reset = () => { rx.set(0); ry.set(0); };
 
   return (
     <motion.div
-      style={{ width, left: k * step, scale, rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
+      style={{ width, height, left: k * step, scale, rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
       onPointerMove={tilt} onPointerLeave={reset}
       onClick={() => { if (!dragging.current && !active) onPick(k); }}
-      className={`absolute top-0 aspect-[20/11] overflow-hidden rounded-2xl bg-forest-950 sm:rounded-[2rem] ${active ? 'shadow-[0_40px_80px_-40px_rgba(0,0,0,0.85)]' : 'cursor-pointer'}`}
+      className={`absolute top-0 overflow-hidden rounded-2xl bg-forest-950 sm:rounded-[2rem] ${active ? 'shadow-[0_40px_80px_-40px_rgba(0,0,0,0.85)]' : 'cursor-pointer'}`}
       aria-roledescription="slide" aria-label={`${num + 1} of ${banners.length}`} aria-hidden={!active}
     >
       <img
-        src={src(b, 2000)} srcSet={`${src(b, 1000)} 1000w, ${src(b, 2000)} 2000w`} sizes="(min-width: 1408px) 1200px, 90vw"
+        src={src(b, 2000)} srcSet={`${src(b, 1000)} 1000w, ${src(b, 2000)} 2000w`} sizes="100vw"
         alt={b.alt} draggable={false} width={2000} height={1100} fetchPriority={k === 0 ? 'high' : 'auto'}
         className="pointer-events-none size-full select-none object-cover"
       />
@@ -63,7 +65,7 @@ function Slide({ b, k, num, x, step, width, active, onPick, dragging }: {
   );
 }
 
-/** Endless banner track: next banner always peeks in, autoplay with progress thumbnails, swipe, arrows, keys. */
+/** Full-width endless banner track: autoplay with progress thumbnails, swipe, arrows, keys. */
 export function BannerSlider() {
   const reduce = useReducedMotion();
   const count = banners.length;
@@ -88,10 +90,11 @@ export function BannerSlider() {
     return () => { ro.disconnect(); window.removeEventListener('resize', onResize); };
   }, []);
 
-  // size slides by width AND height so banner + thumbnails always fit the screen
+  // slides span the full width at the earlier banner height, so banner + thumbnails fit the screen;
+  // on wide screens the banner is trimmed top and bottom (keep banner text in the middle band)
+  const slideW = W;
   const reserve = W >= 640 ? 210 : 190;
-  const byHeight = Math.max(260, (vh - reserve) * (20 / 11));
-  const slideW = W ? Math.min(W * (W >= 1024 ? 0.86 : 0.9), byHeight) : 0;
+  const slideH = Math.min(W * RATIO * (W >= 1024 ? 0.86 : 1), Math.max(143, vh - reserve));
   const step = slideW + GAP;
 
   const next = useCallback(() => setPos((p) => p + 1), []);
@@ -137,25 +140,25 @@ export function BannerSlider() {
       onKeyDown={(e) => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') prev(); }}
       className="focus-visible:outline-none"
     >
-      <div ref={box} className="overflow-hidden px-4 sm:px-0">
+      <div ref={box} className="overflow-hidden">
         <motion.div
           className="relative cursor-grab touch-pan-y active:cursor-grabbing"
-          style={{ x, height: slideW ? (slideW * 11) / 20 : undefined }}
+          style={{ x, height: slideW ? slideH : undefined }}
           drag={count > 1 ? 'x' : false}
           dragMomentum={false}
           onDragStart={() => { dragging.current = true; setHeld(true); }}
           onDragEnd={onDragEnd}
         >
           {slideW > 0 && count > 0 && slots.map((k) => (
-            <Slide key={k} k={k} num={wrap(k, count)} b={banners[wrap(k, count)]} x={x} step={step} width={slideW}
+            <Slide key={k} k={k} num={wrap(k, count)} b={banners[wrap(k, count)]} x={x} step={step} width={slideW} height={slideH}
               active={k === pos} onPick={setPos} dragging={dragging} />
           ))}
-          {!slideW && <div className="aspect-[20/11] w-[90%] rounded-[2rem] bg-forest-950" />}
+          {!slideW && <div className="aspect-[20/11] w-full rounded-[2rem] bg-forest-950" />}
         </motion.div>
       </div>
 
       {/* thumbnails with progress and arrows */}
-      <div className="mt-4 flex items-center gap-3 px-4 sm:mt-5 sm:px-0">
+      <div className="mt-4 flex items-center gap-3 px-1 sm:mt-5 sm:px-6 lg:px-8">
         <div className="flex gap-2 sm:gap-3">
           {banners.map((b, i) => (
             <button key={b.name} onClick={() => show(i)} aria-label={`Show banner ${i + 1}`} aria-current={i === index}

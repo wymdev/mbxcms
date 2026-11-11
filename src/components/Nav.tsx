@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react';
-import { ArrowLeftRight, Calculator, Download, LayoutGrid, Menu, MessageCircle, X } from 'lucide-react';
+import { ArrowLeftRight, Calculator, LayoutGrid, Menu, MessageCircle, X } from 'lucide-react';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { site } from '../config/site';
 
@@ -14,7 +14,7 @@ export const NAV = [
 ];
 const IDS = ['top', ...NAV.map((n) => n.id)];
 
-export function Nav({ onInstall, canInstall }: { onInstall: () => void; canInstall: boolean }) {
+export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useActiveSection(IDS);
@@ -50,11 +50,6 @@ export function Nav({ onInstall, canInstall }: { onInstall: () => void; canInsta
             ))}
           </ul>
           <div className="ml-auto flex items-center gap-2">
-            {canInstall && (
-              <button onClick={onInstall} className="btn-ghost hidden sm:inline-flex">
-                <Download className="size-4" /> Install app
-              </button>
-            )}
             <a href="#convert" className="btn-gold hidden sm:inline-flex">Get a quote</a>
             <button onClick={() => setOpen(true)} className="grid size-11 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/15 lg:hidden" aria-label="Open menu">
               <Menu className="size-5" />
@@ -84,7 +79,6 @@ export function Nav({ onInstall, canInstall }: { onInstall: () => void; canInsta
             </motion.ul>
             <div className="shell mt-8 flex flex-wrap gap-3">
               <a href="#convert" onClick={() => setOpen(false)} className="btn-gold">Get a quote</a>
-              {canInstall && <button onClick={onInstall} className="btn-ghost"><Download className="size-4" /> Install app</button>}
             </div>
           </motion.div>
         )}

@@ -27,7 +27,7 @@ export function Hero({ rates, sample }: { rates: Rate[]; sample: boolean }) {
       <motion.div style={{ y: blobY }} aria-hidden className="absolute -left-40 top-10 size-[34rem] rounded-full bg-forest-600/40 blur-[120px]" />
       <motion.div style={{ y: blobY }} aria-hidden className="absolute -right-24 bottom-0 size-[28rem] rounded-full bg-gold/20 blur-[120px]" />
 
-      <div className="relative mx-auto w-full max-w-[88rem] sm:px-6 lg:px-10">
+      <div className="relative px-3 sm:px-4">
         <BannerSlider />
       </div>
 

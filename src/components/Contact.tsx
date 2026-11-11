@@ -11,7 +11,7 @@ const FAQS = [
   ['Is the rate on this page final?', 'Rates move during the day. When you book, our team confirms the exact rate and amount before you pay, and that is the rate you get.'],
   ['How do I know my money arrived?', 'We send you a receipt slip for every transfer, showing the amount, rate and receiving account.'],
   ['Which currencies do you exchange?', 'Mainly Thai Baht and Myanmar Kyat, plus US Dollar, Singapore Dollar, Yuan, Ringgit, Euro and others. Ask us if yours is not listed.'],
-  ['Is there an app?', 'You can install this site on your phone today from the “On your phone” section. The Mergui Boss app, where you can send a request, upload your slip and track your transfer, is coming soon.'],
+  ['Is there an app?', 'Yes. The Mergui Boss app for Android and iPhone is coming to Google Play and the App Store. In it you can send a request, upload your slip and track your transfer. Until then, message us on Viber or Line.'],
 ];
 
 export function Faq() {

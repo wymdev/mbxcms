@@ -16,6 +16,9 @@ export const site = {
   viber: 'viber://chat?number=%2B959779478149',
   facebook: '',
   hours: 'Service 24/7',
+  // Customer app store pages. Leave empty until the app is published; the buttons then show "Coming soon".
+  appStoreUrl: '',
+  playStoreUrl: '',
 };
 
 /**
